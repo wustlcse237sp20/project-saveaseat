@@ -20,7 +20,7 @@ public class Platform {
 	
 	public void seeRestaurants() {
 		for(Restaurant r: this.restaurants) {
-			System.out.println(r);
+			System.out.println(r.getName());
 		}
 	}
 	
