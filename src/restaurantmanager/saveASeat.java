@@ -8,16 +8,13 @@ import java.util.Random;
 public class saveASeat {
 
 	public static void main(String[] args) throws IOException {
-
+		Platform platform = new Platform();
+		System.out.println("HELLOOO");
 		System.out.println("Welcome to Save a Seat! Are you a restaurant or a customer?");
 		
 		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
 		
 		String userType = reader.readLine();
-		
-		System.out.println("You are a "+userType+".");   
-		
-		Platform platform = new Platform();
 		
 		Restaurant res1 = new Restaurant("Hammy's", 10, 11, 11);
 		Restaurant res2 = new Restaurant("Lucia's", 10, 11, 11);
