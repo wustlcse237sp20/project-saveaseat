@@ -3,7 +3,7 @@ package restaurantmanager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.util.Random;
 
 public class saveASeat {
 
@@ -18,7 +18,8 @@ public class saveASeat {
 		System.out.println("You are a "+userType+".");   
 		
 		Platform platform = new Platform();		
-
+		
+		// restaurant side
 		if(userType.equals("restaurant")) {
 			System.out.println("Please enter the name of your restaurant.");
 			String name =  reader.readLine();
@@ -56,5 +57,39 @@ public class saveASeat {
 				platform.addRestaurantPassword(r, password);
 			}
 		}
+		
+		// customer side
+		if(userType.equals("customer")) {
+			platform.seeRestaurants();
+			System.out.println("Enter the name of the restaurant you'd like to make a reservation at.");
+			String place = reader.readLine();
+			
+			System.out.println("Enter the date you'd like to have a reservation in the format mmdd.");
+			int date = Integer.parseInt(reader.readLine());
+			
+			System.out.println("Enter the time you'd like to have a reservation in the format hhmm.");
+			int time = Integer.parseInt(reader.readLine());
+			
+			System.out.println("Reservation for how many?");
+			int numPeople = Integer.parseInt(reader.readLine());
+			
+			System.out.println("What name do you want the reservation under?");
+			String name = reader.readLine();
+			
+			System.out.println("Do you have any requests?");
+			String requests = reader.readLine();
+			
+			Random rand = new Random();
+			int uniqueId = rand.nextInt(1000000);
+		
+			Reservation reservation = new Reservation(name, numPeople, date, time, requests, uniqueId);
+			
+			for(Restaurant r : platform.restaurants) {
+				if(r.getName()==place) {
+					r.addReservation(reservation);
+				}
+			}
+		}
+		
 	}
 }

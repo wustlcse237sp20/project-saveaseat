@@ -1,5 +1,7 @@
 package restaurantmanager;
 
+import java.util.List;
+
 public class Restaurant {
 	String name;
     int maxCapacity;
@@ -7,6 +9,7 @@ public class Restaurant {
     int openingTime;
     int closingTime;
     Reservation[][] reservations; //TODO: figure out how to store reservations (across days)
+    List<Reservation> listReservations;
     int id;
 
     public Restaurant(String name, int maxCapacity, int openingTime, int closingTime) {
@@ -15,8 +18,8 @@ public class Restaurant {
         this.currentCapacity = 0;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
-        
         this.id = 9999; //TODO: find a way to generate unique id
+        
     }
     
     public String getName()  {
@@ -39,5 +42,8 @@ public class Restaurant {
     	return this.closingTime;
     }
 
+    public void addReservation(Reservation r) {
+    	this.listReservations.add(r);
+    }
 
 }
