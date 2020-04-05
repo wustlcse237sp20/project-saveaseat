@@ -19,6 +19,9 @@ public class Restaurant {
         this.id = 9999; //TODO: find a way to generate unique id
     }
     
+    public String getName()  {
+    	return this.name;
+    }
     
 
 }
