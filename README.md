@@ -1,4 +1,4 @@
-Save a Seat
+#**Save a Seat
 
 Save a Seat is an online reservation platform. It has two intended audiences: restaurants looking for an easy way to keep track of their reservations for any given day and time and customers looking to book reservations quickly at any restaurant that is part of the platform.
 Two classes make up the basic structure of this platform: A restaurant class, which keeps track of the restaurant name, a password for them to access their reservations, an int max_capacity which specifies the max number of people allowed in the restaurant at once, an int current_capacity which keeps track of the number of people in the restaurant at that moment, and a List made of Reservation objects.
