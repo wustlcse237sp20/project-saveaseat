@@ -17,7 +17,14 @@ public class saveASeat {
 		
 		System.out.println("You are a "+userType+".");   
 		
-		Platform platform = new Platform();		
+		Platform platform = new Platform();
+		
+		Restaurant res1 = new Restaurant("Hammy's", 10, 11, 11);
+		Restaurant res2 = new Restaurant("Lucia's", 10, 11, 11);
+		Restaurant res3 = new Restaurant("G Hao's", 10, 11, 11);
+		platform.addRestaurant(res1);
+		platform.addRestaurant(res2);
+		platform.addRestaurant(res3);
 		
 		// restaurant side
 		if(userType.equals("restaurant")) {

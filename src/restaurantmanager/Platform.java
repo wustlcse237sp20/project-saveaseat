@@ -20,6 +20,7 @@ public class Platform {
 	
 	public void addRestaurant(Restaurant r) {
 		this.restaurants.add(r);
+		restaurants.add(r);
 	}
 	
 	public void addRestaurantPassword(Restaurant r, String password) {
