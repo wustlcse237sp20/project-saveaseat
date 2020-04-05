@@ -23,5 +23,21 @@ public class Restaurant {
     	return this.name;
     }
     
+    public int getMaxCapacity()  {
+    	return this.maxCapacity;
+    }
+    
+    public int getCurrentCapacity()  {
+    	return this.currentCapacity;
+    }
+    
+    public int getOpeningTime() {
+    	return this.openingTime;
+    }
+    
+    public int getClosingTime() {
+    	return this.closingTime;
+    }
+
 
 }

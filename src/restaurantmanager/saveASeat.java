@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 public class saveASeat {
 
 	public static void main(String[] args) throws IOException {
-		System.out.println("You're in the right place.");
+
 		System.out.println("Welcome to Save a Seat! Are you a restaurant or a customer?");
 		
 		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
