@@ -2,6 +2,7 @@ package restaurantmanager;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 public class Restaurant {
 	String name;
@@ -11,7 +12,7 @@ public class Restaurant {
     int closingTime;
     Reservation[][] reservations; //TODO: figure out how to store reservations (across days)
     List<Reservation> listReservations;
-    int id;
+    String id;
 
     public Restaurant(String name, int maxCapacity, int openingTime, int closingTime) {
     	this.name = name;
@@ -19,7 +20,7 @@ public class Restaurant {
         this.currentCapacity = 0;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
-        this.id = 9999; //TODO: find a way to generate unique id
+        this.id = UUID.randomUUID().toString(); //TODO: find a way to generate unique id
         this.listReservations= new LinkedList<Reservation>();
         
     }
@@ -42,6 +43,10 @@ public class Restaurant {
     
     public int getClosingTime() {
     	return this.closingTime;
+    }
+    
+    public String getId() {
+    	return this.id;
     }
 
     public void addReservation(Reservation r) {
