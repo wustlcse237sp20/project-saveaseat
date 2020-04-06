@@ -10,11 +10,11 @@ To compile type: javac saveASeat.java Restaurant.java Reservation.java Platform.
 To run type: java restaurantmanager.saveASeat in src folder. 
 
 You can try logging in as 1 of 3 restaurants:  
-Lucia's, password 12345
-Hammy's, password 12345
-G Hao's, password 12345
+1. Lucia's, password 12345
+2. Hammy's, password 12345
+3. G Hao's, password 12345
 
 You can try checking the details of 1 of 3 reservations:
-Reservation ID 12345678 at Hammy's
-Reservation ID 83827429 at Lucia's
-Reservation ID 59938138 at G Hao's
+1. Reservation ID 12345678 at Hammy's
+2. Reservation ID 83827429 at Lucia's
+3. Reservation ID 59938138 at G Hao's
