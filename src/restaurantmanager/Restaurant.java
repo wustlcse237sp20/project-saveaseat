@@ -1,5 +1,6 @@
 package restaurantmanager;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Restaurant {
@@ -19,6 +20,7 @@ public class Restaurant {
         this.openingTime = openingTime;
         this.closingTime = closingTime;
         this.id = 9999; //TODO: find a way to generate unique id
+        this.listReservations= new LinkedList<Reservation>();
         
     }
     
@@ -44,6 +46,13 @@ public class Restaurant {
 
     public void addReservation(Reservation r) {
     	this.listReservations.add(r);
+    }
+    
+    public void seeReservations() {
+    	for (Reservation r : this.listReservations) {
+    		System.out.print("Reservation id: "+ r.getId() + " Details: ");
+    		System.out.println("Reservation under "+r.getName()+" for "+r.getNumPeople()+ " people at "+ r.getTime()+" on "+ r.getDate()+".");
+    	}
     }
 
 }

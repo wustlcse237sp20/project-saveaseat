@@ -9,7 +9,6 @@ public class saveASeat {
 
 	public static void main(String[] args) throws IOException {
 		Platform platform = new Platform();
-		System.out.println("HELLOOO");
 		System.out.println("Welcome to Save a Seat! Are you a restaurant or a customer?");
 		
 		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
@@ -23,6 +22,19 @@ public class saveASeat {
 		platform.addRestaurant(res2);
 		platform.addRestaurant(res3);
 		
+		platform.addRestaurantPassword(res1, "12345");
+		platform.addRestaurantPassword(res2, "12345");
+		platform.addRestaurantPassword(res3, "12345");
+		
+		//Reservation(name, numPeople, date, time, requests, uniqueId);
+		Reservation rv1 = new Reservation("Payden Webb", 10, 1122, 1145, "none", 12345678);
+		Reservation rv2 = new Reservation("Emma Goldberg", 10, 1215, 1145, "none", 83827429);
+		Reservation rv3 = new Reservation("Marcela Interiano", 10, 1010, 1215, "none", 59938138);
+
+		res1.addReservation(rv1);
+		res2.addReservation(rv2);
+		res3.addReservation(rv3);
+		
 		// restaurant side
 		if(userType.equals("restaurant")) {
 			System.out.println("Please enter the name of your restaurant.");
@@ -31,12 +43,13 @@ public class saveASeat {
 			//check if name exists in list of restaurants
 			boolean found =  false;
 			for(Restaurant r : platform.restaurants) {
-				if(r.getName()==name) {
+				if(r.getName().equals(name)) {
 					found = true;
 					System.out.println("Please enter your restaurant password.");
 					String password =  reader.readLine();
-					if(platform.restaurantPasswords.get(r) ==password) {
+					if(platform.restaurantPasswords.get(r).equals(password)) {
 						System.out.println("You are logged in.");
+						break;
 					}
 				} 
 			}
@@ -59,7 +72,20 @@ public class saveASeat {
 				String password = reader.readLine();
 				
 				platform.addRestaurantPassword(r, password);
+				System.out.println("Your restaurant has been added to our system.");
 			}
+			
+			System.out.println("Here are your current reservations: ");
+			Restaurant currentRestaurant = null;
+			for(Restaurant r : platform.restaurants) {
+				if(r.getName().equals(name)) {
+					currentRestaurant = r;
+				}
+			}
+			currentRestaurant.seeReservations();
+			System.out.print("Here is your current capacity: ");
+			System.out.println(currentRestaurant.getCurrentCapacity());
+			
 		}
 		
 		// customer side
@@ -89,7 +115,7 @@ public class saveASeat {
 			Reservation reservation = new Reservation(name, numPeople, date, time, requests, uniqueId);
 			
 			for(Restaurant r : platform.restaurants) {
-				if(r.getName()==place) {
+				if(r.getName().equals(place)) {
 					r.addReservation(reservation);
 				}
 			}
