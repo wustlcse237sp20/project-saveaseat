@@ -27,12 +27,10 @@ public class Reservation {
     }
     
     public int getDate() {
-    	System.out.println(this.date);
     	return this.date;
     }
     
     public int getTime() {
-    	System.out.println(this.time);
     	return this.time;
     }
     
