@@ -3,9 +3,11 @@ package restaurantmanager;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-public class GUI {
+public class GUI implements ActionListener {
 	public static void main(String[] args) {
 		startPage();
 	}
@@ -25,9 +27,21 @@ public class GUI {
 		
 		JButton ownerButton = new JButton("Restaurant");
 		ownerButton.setBounds(60, 100, 100, 25);
+		ownerButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("HELLO OWNER");
+			}
+		});
 		panel.add(ownerButton);
 		JButton customerButton = new JButton("Customer");
 		customerButton.setBounds(180, 100, 100, 25);
+		customerButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("HELLO CUSTOMER");
+			}
+		});
 		panel.add(customerButton);
 		
 		frame.setVisible(true);
