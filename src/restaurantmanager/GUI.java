@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
-public class GUI implements ActionListener {
+public abstract class GUI implements ActionListener {
 	public static void main(String[] args) {
 		startPage();
 	}
