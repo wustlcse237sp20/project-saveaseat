@@ -16,29 +16,32 @@ import com.google.gson.stream.JsonReader;
 public class LocalStorage {
 	
 	private static String FILE_PATH = "src/restaurantmanager/LocalStorage.txt";
-	
 	private static Gson gson = new Gson();
 	
-	public static void main(String[] args) {
-		Platform platform = new Platform();
-		Restaurant res1 = new Restaurant("Hammy's", 10, 11, 11);
-		Restaurant res2 = new Restaurant("Lucia's", 10, 11, 11);
-		Restaurant res3 = new Restaurant("G Hao's", 10, 11, 11);
-		platform.addRestaurant(res1);
-		platform.addRestaurant(res2);
-		platform.addRestaurant(res3);
-		
-		writeToFile(gson.toJson(platform).toString());	
-		readFromFile();
-	}
+	//public LocalStorage() {}
 	
-	private static void writeToFile(String data) {
+//	public static void main(String[] args) {
+//		Platform platform = new Platform();
+//		Restaurant res1 = new Restaurant("Hammy's", 10, 11, 11);
+//		Restaurant res2 = new Restaurant("Lucia's", 10, 11, 11);
+//		Restaurant res3 = new Restaurant("G Hao's", 10, 11, 11);
+//		platform.addRestaurant(res1);
+//		platform.addRestaurant(res2);
+//		platform.addRestaurant(res3);
+//		
+//		writeToFile(gson.toJson(platform).toString());	
+//		readFromFile(platform);
+//	}
+	
+	public static void writeToFile(Platform platform) {
+		String data = gson.toJson(platform).toString();
+		
 		File f = new File(FILE_PATH);
 		if (!f.exists()) { // if file not there, make a file
 			try {
 				f.createNewFile();
 			} catch (IOException e) {
-				System.out.println("Excepton Occured: " + e.toString());
+				System.out.println("Error: " + e.toString());
 			}
 		}
 		else { // if file is there, delete all contents
@@ -52,21 +55,18 @@ public class LocalStorage {
 		}
  
 		try {
-			// Convenience class for writing character files
 			FileWriter writer = new FileWriter(f.getAbsoluteFile(), true);
- 
-			// Writes text to a character-output stream
-			BufferedWriter bufferWriter = new BufferedWriter(writer);
+ 			BufferedWriter bufferWriter = new BufferedWriter(writer);
 			bufferWriter.write(data.toString());
 			bufferWriter.close();
  
-			System.out.println(("Company data saved at file location: " + FILE_PATH + " Data: " + data + "\n"));
+			System.out.println(("Data saved at location: " + FILE_PATH));
 		} catch (IOException e) {
-			System.out.println(("Hmm.. Got an error while saving Company data to file " + e.toString()));
+			System.out.println(("Error: " + e.toString()));
 		}
 	}
 	
-	public static void readFromFile() {
+	public static void readFromFile(Platform plat) {
 		File f = new File(FILE_PATH);
 		if (!f.exists())
 			System.out.println("File doesn't exist");
@@ -77,17 +77,13 @@ public class LocalStorage {
  
 			JsonReader reader = new JsonReader(isReader);
 			
-			Platform plat = gson.fromJson(reader, Platform.class);
-			for (Restaurant r : plat.restaurants) {
-				System.out.println(r.name);
-			}
-
- 
+			plat = gson.fromJson(reader, Platform.class);
+			
 		} catch (Exception e) {
-			System.out.println("error load cache from file " + e.toString());
+			System.out.println("Error loading from file: " + e.toString());
 		}
  
-		System.out.println("\nComapny Data loaded successfully from file " + FILE_PATH);
+		System.out.println("\nData loaded successfully from:w " + FILE_PATH);
  
 	}
 	

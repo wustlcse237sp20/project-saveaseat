@@ -22,7 +22,6 @@ public class Restaurant {
         this.closingTime = closingTime;
         this.id = UUID.randomUUID().toString(); //TODO: find a way to generate unique id
         this.listReservations= new LinkedList<Reservation>();
-        
     }
     
     public String getName()  {
