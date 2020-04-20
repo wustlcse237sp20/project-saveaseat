@@ -1,4 +1,4 @@
-package test;
+package restaurantmanager;
 
 public class Reservation {
 	String name;
