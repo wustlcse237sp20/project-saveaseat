@@ -11,7 +11,7 @@ public class Restaurant {
     int openingTime;
     int closingTime;
     Reservation[][] reservations; //TODO: figure out how to store reservations (across days)
-    List<Reservation> listReservations;
+    public List<Reservation> listReservations;
     String id;
 
     public Restaurant(String name, int maxCapacity, int openingTime, int closingTime) {

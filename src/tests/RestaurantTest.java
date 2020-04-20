@@ -6,60 +6,49 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import restaurantmanager.Restaurant;
+import restaurantmanager.Reservation;
+import restaurantmanager.Platform;
 
 class RestaurantTest {
 
-	private Restaurant r;
+	private Restaurant testRestaurant;
+	private Reservation testReservation; 
 	
 	@BeforeEach
 	void setupTestingObjects() {
-		r = new Restaurant("Test", 1, 1, 1);
-	}
-
-	@Test
-	void testRestaurant() {
-		fail("Not yet implemented");
+		testRestaurant = new Restaurant("Test", 1, 1, 1);
+		testReservation = new Reservation("Test", 1, 1, 1800, "none", 123); 
 	}
 
 	@Test
 	void testGetName() {
-//		fail("Not yet implemented");
-		assertEquals("Test", r.getName()); 
+		assertEquals("Test", testRestaurant.getName()); 
 	}
 
 	@Test
 	void testGetMaxCapacity() {
-		fail("Not yet implemented");
+		assertEquals(1, testRestaurant.getMaxCapacity()); 
 	}
 
 	@Test
 	void testGetCurrentCapacity() {
-		fail("Not yet implemented");
+		assertEquals(0, testRestaurant.getCurrentCapacity());
 	}
 
 	@Test
 	void testGetOpeningTime() {
-		fail("Not yet implemented");
+		assertEquals(1, testRestaurant.getOpeningTime());
 	}
 
 	@Test
 	void testGetClosingTime() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testGetId() {
-		fail("Not yet implemented");
+		assertEquals(1, testRestaurant.getClosingTime());
 	}
 
 	@Test
 	void testAddReservation() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testSeeReservations() {
-		fail("Not yet implemented");
+		testRestaurant.addReservation(testReservation); 
+		assertEquals(1, testRestaurant.listReservations.size()); 
 	}
 
 }
