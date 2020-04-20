@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.Random;
 
 public class Platform {
-	List<Restaurant> restaurants;
-	Map<Restaurant, String> restaurantPasswords;
+	public List<Restaurant> restaurants;
+	public Map<Restaurant, String> restaurantPasswords;
 
     public Platform() {
       restaurants =  new LinkedList<Restaurant>();
