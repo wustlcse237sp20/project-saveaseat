@@ -1,4 +1,4 @@
-package restaurantmanager;
+package test;
 
 import java.util.LinkedList;
 import java.util.List;
