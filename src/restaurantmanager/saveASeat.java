@@ -10,6 +10,10 @@ public class saveASeat {
 
 	public static void main(String[] args) throws IOException {
 		Platform platform = new Platform();
+		
+		LocalStorage storage = new LocalStorage();
+		storage.readFromFile(platform);
+		
 		System.out.println("Welcome to Save a Seat! Are you a restaurant or a customer?");
 
 		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));

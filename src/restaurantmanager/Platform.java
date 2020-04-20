@@ -30,6 +30,7 @@ public class Platform {
 	
 	public void addRestaurant(Restaurant r) {
 		this.restaurants.add(r);
+		LocalStorage.writeToFile(this);
 	}
 	
 	public void addRestaurantPassword(Restaurant r, String password) {
