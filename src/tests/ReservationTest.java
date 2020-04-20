@@ -17,57 +17,39 @@ import restaurantmanager.Restaurant;
 import restaurantmanager.Reservation;
 import restaurantmanager.Platform;
 
-class PlatformTest {
 
-	Platform p;
+class ReservationTest {
+	
+	Reservation r;
 	
 	@BeforeEach
-	void testingSetup() {
-		p = new Platform();
+	void setupTest() {
+		r = new Reservation("Doug", 2, 1214, 1215, "none",3728389);
 	}
 	
 	@Test
-	void testGetPassword() {
-		Restaurant r = new Restaurant("Res", 1, 1, 1);
-		p.addRestaurantPassword(r, "12345");
-		assertEquals("12345", p.getPassword(r));
+	void testGetName() {
+		assertEquals("Doug", r.getName());
 	}
 	
 	@Test
-	void testSeeRestaurants() {
-		Restaurant r = new Restaurant("Res", 1, 1, 1);
-		Restaurant r1 = new Restaurant("Res1", 1, 1, 1);
-		Restaurant r2 = new Restaurant("Res2", 1, 1, 1);
-		Restaurant r3 = new Restaurant("Res3", 1, 1, 1);
-		p.addRestaurant(r);
-		p.addRestaurant(r1);
-		p.addRestaurant(r2);
-		p.addRestaurant(r3);
-		
-		ByteArrayOutputStream printed = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(printed));
-		
-		for(int i = 0; i < p.restaurants.size(); i++) {
-			System.out.println(p.restaurants.get(i));
-		}
-		
-		String correctOutput = r.getName() +"\n"+r1.getName() +"\n"+r2.getName() +"\n"+r3.getName();
-		assertEquals(correctOutput, printed.toString());
+	void testGetNumPeople() {
+		assertEquals(2, r.getNumPeople());
 	}
 	
 	@Test
-	void testAddRestaurant() {
-		Restaurant r = new Restaurant("Res", 1, 1, 1);
-		p.addRestaurant(r);
-		assertTrue(p.restaurants.contains(r));
+	void testGetDate() {
+		assertEquals(1214, r.getDate());
 	}
 	
 	@Test
-	void testAddRestaurantPassword() {
-		Restaurant r = new Restaurant("Res", 1, 1, 1);
-		p.addRestaurant(r);
-		p.addRestaurantPassword(r, "12345");
-		assertEquals("12345", p.restaurantPasswords.get(r));
+	void testGetTime() {
+		assertEquals(1215, r.getTime());
+	}
+	
+	@Test
+	void testGetId() {
+		assertEquals(3728389, r.getId());
 	}
 
 }
