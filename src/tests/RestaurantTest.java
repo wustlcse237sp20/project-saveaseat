@@ -17,7 +17,7 @@ class RestaurantTest {
 	@BeforeEach
 	void setupTestingObjects() {
 		testRestaurant = new Restaurant("Test", 1, 1, 1);
-		testReservation = new Reservation("Test", 1, 1, 1800, "none", 123); 
+		testReservation = new Reservation("Test", "Test", 1, 1, 1800, "none", 123); 
 	}
 
 	@Test
