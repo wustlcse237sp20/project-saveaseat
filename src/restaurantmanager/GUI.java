@@ -249,7 +249,7 @@ public abstract class GUI implements ActionListener {
 		String[] data = new String[1000];
 		int i = 0;
 		for (Reservation res : reservations) {
-			data[i] = "Reservation id: "+ res.getId() + " Details: Reservation under " + res.getName() + " for "+ res.getNumPeople()+ " people at "+ res.getTime()+" on "+ res.getDate()+".";
+			data[i] = "Reservation id: "+ res.getId() + " Details: Reservation under " + res.getName() + " for "+ res.getNumPeople()+ " people at "+ String.format("%04d", res.getTime())+" on "+ String.format("%04d", res.getDate())+".";
 			i++;
     	}
 		String[] resData = new String[i];
