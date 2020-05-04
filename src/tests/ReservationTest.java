@@ -24,7 +24,7 @@ class ReservationTest {
 	
 	@BeforeEach
 	void setupTest() {
-		r = new Reservation("Hammy's", "Doug", 2, 1214, 1215, "none",3728389);
+		r = new Reservation("Hamish's Pasta", "Doug", 2, 1200, 1215, "none",3728389);
 	}
 	
 	@Test
@@ -44,7 +44,7 @@ class ReservationTest {
 	
 	@Test
 	void testGetTime() {
-		assertEquals(1215, r.getTime());
+		assertEquals(1200, r.getTime());
 	}
 	
 	@Test
