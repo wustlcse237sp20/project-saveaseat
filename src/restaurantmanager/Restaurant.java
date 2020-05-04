@@ -1,5 +1,8 @@
 package restaurantmanager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -10,7 +13,6 @@ public class Restaurant {
     int currentCapacity;
     int openingTime;
     int closingTime;
-    Reservation[][] reservations; //TODO: figure out how to store reservations (across days)
     public List<Reservation> listReservations;
     String id;
 
@@ -22,7 +24,6 @@ public class Restaurant {
         this.closingTime = closingTime;
         this.id = UUID.randomUUID().toString();
         this.listReservations= new LinkedList<Reservation>();
-        
     }
     
     public String getName()  {
@@ -57,10 +58,33 @@ public class Restaurant {
     	this.listReservations.add(r);
     }
     
+    public void run () throws IOException { 
+    	boolean check = false; 
+		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
+    	while (!check) { 
+    		System.out.println("Select from following options:");
+    		System.out.println("1 - View current reservations");
+    		System.out.println("q - At anytime to quit");
+    		String input = reader.readLine(); 
+    		if (input.equals("1")) { 
+    			seeReservations(); 
+			}
+			if (input.equals("q")) { 
+				check = true;
+				System.out.println("Goodbye!"); 
+			}
+    	}
+    	System.exit(0);
+    }
+    
     public void seeReservations() {
-    	for (Reservation r : this.listReservations) {
-    		System.out.print("Reservation id: "+ r.getId() + " Details: ");
-    		System.out.println("Reservation under "+r.getName()+" for "+r.getNumPeople()+ " people at "+ r.getTime()+" on "+ r.getDate()+".");
+    	if (this.listReservations.size() != 0 ) {
+    	 	for (Reservation r : this.listReservations) {
+        		System.out.print("Reservation id: "+ r.getId() + " Details: ");
+        		System.out.println("Reservation under "+r.getName()+" for "+r.getNumPeople()+ " people at "+ r.getTime()+" on "+ r.getDate()+".");
+        	}
+    	} else { 
+    		System.out.println("No new reservations"); 
     	}
     }
    

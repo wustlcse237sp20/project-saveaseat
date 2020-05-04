@@ -1,7 +1,8 @@
 package restaurantmanager;
 
 public class Reservation {
-	String name;
+	String restaurantName; 
+	String reservationName;
     int numPeople;
     int date;
     int time;
@@ -9,8 +10,10 @@ public class Reservation {
     String requests;
 
 
-    public Reservation(String name, int numPeople, int date, int time, String requests, int id) {
-        this.name = name;
+    public Reservation(String restaurantName, String reservationName, int numPeople, int date, int time, String requests, int id) {
+        
+    	this.restaurantName = restaurantName; 
+    	this.reservationName = reservationName;
     	this.numPeople = numPeople;
         this.date = date;
         this.time = time;
@@ -18,8 +21,12 @@ public class Reservation {
         this.id = id;
     }
     
+    public String getRestaurantName() { 
+    	return this.restaurantName; 
+    }
+    
     public String getName()  {
-    	return this.name;
+    	return this.reservationName;
     }
     
     public int getNumPeople() {

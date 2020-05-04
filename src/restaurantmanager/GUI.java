@@ -37,9 +37,9 @@ public abstract class GUI implements ActionListener {
 	}
 	
 	static void loadData(Platform platform) {
-		Restaurant res1 = new Restaurant("Hammy", 10, 1000, 2100);
-		Restaurant res2 = new Restaurant("Lucia", 10, 1000, 2100);
-		Restaurant res3 = new Restaurant("G Hao", 10, 1000, 2100);
+		Restaurant res1 = new Restaurant("Hamish's Pasta", 100, 1000, 1700);
+		Restaurant res2 = new Restaurant("Lucia's Chicken", 50, 800, 1400);
+		Restaurant res3 = new Restaurant("G Hao's Burgers", 30, 1700, 2200);
 		platform.addRestaurant(res1);
 		platform.addRestaurant(res2);
 		platform.addRestaurant(res3);
@@ -47,9 +47,9 @@ public abstract class GUI implements ActionListener {
 		platform.addRestaurantPassword(res2, "12345");
 		platform.addRestaurantPassword(res3, "12345");
 		
-		Reservation rv1 = new Reservation("Payden Webb", 10, 1122, 1145, "none", 12345678);
-		Reservation rv2 = new Reservation("Emma Goldberg", 10, 1215, 1145, "none", 83827429);
-		Reservation rv3 = new Reservation("Marcela Interiano", 10, 1010, 1215, "none", 59938138);
+		Reservation rv1 = new Reservation("Hamish's Pasta", "Payden Webb", 10, 1122, 1145, "none", 12345678);
+		Reservation rv2 = new Reservation("Lucia's Chicken", "Emma Goldberg", 10, 1215, 1145, "none", 83827429);
+		Reservation rv3 = new Reservation("G Hao's Burgers", "Marcela Interiano", 10, 1010, 1215, "none", 59938138);
 
 		res1.addReservation(rv1);
 		res1.addReservation(rv2);
@@ -392,7 +392,7 @@ public abstract class GUI implements ActionListener {
 				int time = (int)selectTime.getSelectedItem();
 				String request = requestsText.getText();
 				
-				Reservation res = new Reservation(name, partySize, date, time, request, 12345);
+				Reservation res = new Reservation(r.getName(), name, partySize, date, time, request, 12345);
 				r.addReservation(res);
 				
 				statusLabel.setText("Reservation successfully made!! Your reservation id is: ");
