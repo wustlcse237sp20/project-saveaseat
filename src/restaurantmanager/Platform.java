@@ -243,6 +243,7 @@ public class Platform {
      * @param id of the reservation
      */
 	public void manageUserReservations(String restaurantName, int reservationId) throws IOException { 
+		
 		System.out.println("Here are your reservation details: ");
 
 		for(Restaurant r : getRestaurants()) {
