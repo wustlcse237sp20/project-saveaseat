@@ -46,6 +46,18 @@ public class Restaurant {
     	return this.closingTime;
     }
     
+    public int setMaxCapacity(int capacity)  {
+    	return this.maxCapacity = capacity;
+    }
+    
+    public int setOpeningTime(int time) {
+    	return this.openingTime = time;
+    }
+    
+    public int setClosingTime(int time) {
+    	return this.closingTime = time;
+    }
+    
     public String getId() {
     	return this.id;
     }

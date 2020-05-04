@@ -312,10 +312,10 @@ public abstract class GUI implements ActionListener {
 		details.setBounds(10, 50, 200, 25);
 		restaurantPanel.add(details);
 		
-		JLabel openTime = new JLabel("Opening Time: " + r.getOpeningTime());
+		JLabel openTime = new JLabel("Opening Time: " + String.format("%04d", r.getOpeningTime()));
 		openTime.setBounds(10, 80, 200, 25);
 		restaurantPanel.add(openTime);
-		JLabel closeTime = new JLabel("Closing Time: " + r.getClosingTime());
+		JLabel closeTime = new JLabel("Closing Time: " + String.format("%04d", r.getClosingTime()));
 		closeTime.setBounds(10, 110, 200, 25);
 		restaurantPanel.add(closeTime);
 		
@@ -391,11 +391,12 @@ public abstract class GUI implements ActionListener {
 				int partySize = (int) selectSize.getSelectedItem();
 				int time = (int)selectTime.getSelectedItem();
 				String request = requestsText.getText();
+				int id = (int) (10000000 + Math.random() * 90000000);
 				
-				Reservation res = new Reservation(r.getName(), name, partySize, date, time, request, 12345);
+				Reservation res = new Reservation(r.getName(), name, partySize, date, time, request, id);
 				r.addReservation(res);
 				
-				statusLabel.setText("Reservation successfully made!! Your reservation id is: ");
+				statusLabel.setText("Reservation successfully made!! Your reservation id is: " + id);
 			}
 		});
 		restaurantPanel.add(submitButton);
@@ -461,12 +462,19 @@ public abstract class GUI implements ActionListener {
 		selectCloseTime.setBounds(10, 230, 200, 25);
 		ownerSettingsPanel.add(selectCloseTime);
 		
+		JLabel statusLabel = new JLabel("");
+		statusLabel.setBounds(10, 290, 300, 25);
+		ownerSettingsPanel.add(statusLabel);
+		
 		JButton editButton = new JButton("Update");
 		editButton.setBounds(10, 260, 120, 25);
 		editButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("UPDATE");
+				r.setMaxCapacity((int)selectCapacity.getSelectedItem());
+				r.setOpeningTime(Integer.parseInt((String)selectOpenTime.getSelectedItem()));
+				r.setClosingTime(Integer.parseInt((String)selectCloseTime.getSelectedItem()));
+				statusLabel.setText("Update success!");
 			}
 		});
 		ownerSettingsPanel.add(editButton);
