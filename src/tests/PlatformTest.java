@@ -21,10 +21,9 @@ class PlatformTest {
 	@Test
 	void testGetPassword() {
 		Restaurant r = new Restaurant("Res", 10, 1100, 2300);
-		p.addRestaurantPassword(r, "12345");
-		assertEquals("12345", p.getPassword(r));
+		p.addRestaurantPassword(r, "123456");
+		assertEquals("123456", p.getPassword(r));
 	}
-	
 	
 	@Test
 	void testAddRestaurant() {
