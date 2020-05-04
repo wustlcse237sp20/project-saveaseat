@@ -245,13 +245,16 @@ public class Platform {
 	public void manageUserReservations(String restaurantName, int reservationId) throws IOException { 
 		
 		System.out.println("Here are your reservation details: ");
-
+    
+		Restaurant currentRestaurant;
+		Reservation currentReservation; 
+	
 		for(Restaurant r : getRestaurants()) {
 			if(r.getName().equals(restaurantName)) {
-				current = r;
+				currentRestaurant = r;
 				for(Reservation res : r.listReservations) {
 					if(res.getId() == reservationId) {
-						currentRes = res; 
+						currentReservation = res; 
 						System.out.println("Reservation for a party of "+res.getNumPeople()+" under the name "+res.getName()+
 								" at "+res.getTime()+ " on "+res.getDate()+".");
 					}
