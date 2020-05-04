@@ -38,10 +38,6 @@ public class Platform {
 		return "0";
 	}
 	
-	public List<Restaurant> getRestaurants() {
-		return this.restaurants;
-	}
-	
 	public boolean restaurantInSystem(String name) {
 		for (Restaurant r: this.restaurants) {
 			if (name.equals(r.getName())) {
