@@ -20,22 +20,21 @@ class PlatformTest {
 	
 	@Test
 	void testGetPassword() {
-		Restaurant r = new Restaurant("Res", 1, 1, 1);
-		p.addRestaurantPassword(r, "12345");
-		assertEquals("12345", p.getPassword(r));
+		Restaurant r = new Restaurant("Res", 10, 1100, 2300);
+		p.addRestaurantPassword(r, "123456");
+		assertEquals("123456", p.getPassword(r));
 	}
-	
 	
 	@Test
 	void testAddRestaurant() {
-		Restaurant r = new Restaurant("Res", 1, 1, 1);
+		Restaurant r = new Restaurant("Res", 10, 1100, 2300);
 		p.addRestaurant(r);
 		assertTrue(p.restaurants.contains(r));
 	}
 	
 	@Test
 	void testAddRestaurantPassword() {
-		Restaurant r = new Restaurant("Res", 1, 1, 1);
+		Restaurant r = new Restaurant("Res", 10, 1100, 2300);
 		p.addRestaurant(r);
 		p.addRestaurantPassword(r, "12345");
 		assertEquals("12345", p.restaurantPasswords.get(r));
@@ -51,5 +50,6 @@ class PlatformTest {
 		p.addRestaurantPassword(r2, "12345");
 		assertEquals(2, p.getRestaurants().size());
 	}
+
 
 }

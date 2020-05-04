@@ -7,15 +7,29 @@ Customers should be able to pick a restaurant, choose a date and the size of the
 Restaurant owners should be able to enter the name of their restaurant, enter their password, and then manage their bookings: they should be able to see their current reservations and the remaining restaurant capacity at each timeslot.
 
 To compile type: javac *.java in the restaurantmanager folder.
+
 To run type: java restaurantmanager.saveASeat in src folder.
+
 To run GUI type: java restaurantmanager.GUI in src folder. 
 
+Or open our executable SaveASeat.jar file in the main folder.
+
 You can try logging in as 1 of 3 restaurants:  
-1. Lucia's, password 12345
-2. Hammy's, password 12345
-3. G Hao's, password 12345
+1. Lucia's Chicken, password 12345
+2. Hamish's Pasta, password 12345
+3. G Hao's Burgers, password 12345
 
 You can try checking the details of 1 of 3 reservations:
-1. Reservation ID 12345678 at Hammy's
-2. Reservation ID 83827429 at Lucia's
-3. Reservation ID 59938138 at G Hao's
+1. Reservation ID 12345678 at Hamish's Pasta
+2. Reservation ID 83827429 at Lucia's Chicken
+3. Reservation ID 59938138 at G Hao's Burgers
+
+User stories completed this iteration: 
+
+- As a user I want to be able to check on my reservation using its unique ID. 
+- As a customer, if my desired reservation time/date is available, I want to be able to confirm my booking and to receive a Unique ID associated with my reservation.
+- As a customer, I can choose, from a list of available restaurants, where I would like to make a reservation.
+- As a user, I want to be able to use a well organized application (with GUI) to manage reservations.
+- As a user, I want to be able to use a well organized application (with GUI) to manage reservations.
+
+Also implemented input sanitization that was not present in previous iterations to ensure that only valid user inputs are accepted. 
