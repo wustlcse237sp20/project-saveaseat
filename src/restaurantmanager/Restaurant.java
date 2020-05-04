@@ -30,10 +30,6 @@ public class Restaurant {
     	return this.name;
     }
     
-    public List<Reservation> getReservations() { 
-    	return this.listReservations; 
-    }
-    
     public int getMaxCapacity()  {
     	return this.maxCapacity;
     }
@@ -52,6 +48,10 @@ public class Restaurant {
     
     public String getId() {
     	return this.id;
+    }
+    
+    public List<Reservation> getReservations() {
+    	return this.listReservations;
     }
 
     public void addReservation(Reservation r) {
@@ -87,5 +87,6 @@ public class Restaurant {
     		System.out.println("No new reservations"); 
     	}
     }
+   
 
 }

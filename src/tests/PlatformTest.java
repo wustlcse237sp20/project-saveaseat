@@ -40,5 +40,16 @@ class PlatformTest {
 		p.addRestaurantPassword(r, "12345");
 		assertEquals("12345", p.restaurantPasswords.get(r));
 	}
+	
+	@Test
+	void getRestaurants() {
+		Restaurant r = new Restaurant("Res", 1, 1, 1);
+		p.addRestaurant(r);
+		p.addRestaurantPassword(r, "12345");
+		Restaurant r2 = new Restaurant("Res2", 1, 1, 2);
+		p.addRestaurant(r2);
+		p.addRestaurantPassword(r2, "12345");
+		assertEquals(2, p.getRestaurants().size());
+	}
 
 }
