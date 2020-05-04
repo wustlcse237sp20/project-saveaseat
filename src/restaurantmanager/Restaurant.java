@@ -30,10 +30,6 @@ public class Restaurant {
     	return this.name;
     }
     
-    public List<Reservation> getReservations() { 
-    	return this.listReservations; 
-    }
-    
     public int getMaxCapacity()  {
     	return this.maxCapacity;
     }
@@ -50,14 +46,33 @@ public class Restaurant {
     	return this.closingTime;
     }
     
+    public int setMaxCapacity(int capacity)  {
+    	return this.maxCapacity = capacity;
+    }
+    
+    public int setOpeningTime(int time) {
+    	return this.openingTime = time;
+    }
+    
+    public int setClosingTime(int time) {
+    	return this.closingTime = time;
+    }
+    
     public String getId() {
     	return this.id;
+    }
+    
+    public List<Reservation> getReservations() {
+    	return this.listReservations;
     }
 
     public void addReservation(Reservation r) {
     	this.listReservations.add(r);
     }
     
+    /**
+     * Runs the basic platform and collects user requests
+     */
     public void run () throws IOException { 
     	boolean check = false; 
 		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
@@ -77,6 +92,9 @@ public class Restaurant {
     	System.exit(0);
     }
     
+    /**
+     * Shows all reservations in the system
+     */
     public void seeReservations() {
     	if (this.listReservations.size() != 0 ) {
     	 	for (Reservation r : this.listReservations) {
@@ -87,5 +105,20 @@ public class Restaurant {
     		System.out.println("No new reservations"); 
     	}
     }
+    
+    /**
+     * Removes selected reservation
+     * @param reservation id
+     */
+    public boolean removeReservation(int id) {
+    	for (int i = 0; i < this.listReservations.size(); i++) {
+    		if (id == this.listReservations.get(i).getId()) {
+    			this.listReservations.remove(i);
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+   
 
 }

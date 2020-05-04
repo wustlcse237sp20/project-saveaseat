@@ -24,7 +24,7 @@ class ReservationTest {
 	
 	@BeforeEach
 	void setupTest() {
-		r = new Reservation("Hamish's Pasta", "Doug", 2, 1200, 1215, "none",3728389);
+		r = new Reservation("Hamish's Pasta", "Doug", 2, 1214, 1200, "none",3728389);
 	}
 	
 	@Test

@@ -16,9 +16,9 @@ public class saveASeat {
 		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
 		String userType = reader.readLine();
 
-		Restaurant res1 = new Restaurant("Hammy's", 10, 1100, 2300);
-		Restaurant res2 = new Restaurant("Lucia's", 10, 1100, 2300);
-		Restaurant res3 = new Restaurant("G Hao's", 10, 1100, 2300);
+		Restaurant res1 = new Restaurant("Hamish's Pasta", 10, 1100, 2300);
+		Restaurant res2 = new Restaurant("Lucia's Chicken", 10, 1100, 2300);
+		Restaurant res3 = new Restaurant("G Hao's Burgers", 10, 1100, 2300);
 
 		platform.addRestaurant(res1);
 		platform.addRestaurant(res2);
@@ -28,9 +28,9 @@ public class saveASeat {
 		platform.addRestaurantPassword(res2, "12345");
 		platform.addRestaurantPassword(res3, "12345");
 
-		Reservation rv1 = new Reservation("Hammy's", "Payden Webb", 10, 1122, 1145, "none", 12345678);
-		Reservation rv2 = new Reservation("Lucia's", "Emma Goldberg", 10, 1215, 1145, "none", 83827429);
-		Reservation rv3 = new Reservation("G Hao's", "Marcela Interiano", 10, 1010, 1215, "none", 59938138);
+		Reservation rv1 = new Reservation("Hamish's Pasta", "Payden Webb", 10, 1122, 1145, "none", 12345678);
+		Reservation rv2 = new Reservation("Lucia's Chicken", "Emma Goldberg", 10, 1215, 1145, "none", 83827429);
+		Reservation rv3 = new Reservation("G Hao's Burgers", "Marcela Interiano", 10, 1010, 1215, "none", 59938138);
 
 		res1.addReservation(rv1);
 		res2.addReservation(rv2);
