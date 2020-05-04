@@ -137,6 +137,13 @@ public class Platform {
 
 		System.out.println("Enter the time you'd like to have a reservation in the format hhmm. Reservations only available in hourly increments.");
 		int time = Integer.parseInt(reader.readLine());
+		int hour = Integer.parseInt(Integer.toString(time).substring(0, 2));
+		int min = Integer.parseInt(Integer.toString(time).substring(2, 4));
+		while(min!=00) {
+			System.out.println("Please enter a time in hourly increments. Examples: 1100, 1200");
+			time = Integer.parseInt(reader.readLine());
+			min = Integer.parseInt(Integer.toString(time).substring(2, 4));
+		}
 
 		while(!checkAvailability(date, numPeople, time, place)) {
 			System.out.println("Sorry, that time is not available. Available times for this date are: ");
