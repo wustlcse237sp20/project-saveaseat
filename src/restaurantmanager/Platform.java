@@ -118,6 +118,7 @@ public class Platform {
 	}
 	
 	public void manageUserReservations(String restaurantName, int reservationId) throws IOException { 
+		
 		System.out.println("Here are your reservation details: ");
 		Restaurant current;
 		Reservation currentRes; 
