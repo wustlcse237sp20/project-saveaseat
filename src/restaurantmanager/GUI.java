@@ -11,7 +11,6 @@ import javax.swing.JList;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -200,7 +199,7 @@ public abstract class GUI implements ActionListener {
 			resData[j] = data[j];
 		}
 				
-		JList<String> resList = new JList(resData); //data has type Object[]
+		JList<String> resList = new JList<String>(resData); //data has type Object[]
 		resList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		resList.setLayoutOrientation(JList.VERTICAL_WRAP);
 		resList.setVisibleRowCount(-1);
@@ -257,7 +256,7 @@ public abstract class GUI implements ActionListener {
 			resData[j] = data[j];
 		}
 				
-		JList resList = new JList(resData); //data has type Object[]
+		JList<String> resList = new JList<String>(resData); //data has type Object[]
 		resList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		resList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		resList.setVisibleRowCount(-1);
@@ -323,10 +322,10 @@ public abstract class GUI implements ActionListener {
 		reserve.setBounds(10, 150, 200, 25);
 		restaurantPanel.add(reserve);
 		
-		JComboBox selectTime = new JComboBox();
+		JComboBox<String> selectTime = new JComboBox<String>();
 		int currTime = r.getOpeningTime();
 		while (currTime < r.getClosingTime() - 30) {
-			selectTime.addItem(currTime);
+			selectTime.addItem(Integer.toString(currTime));
 			currTime += 15;
 			if (currTime % 100 >= 60) {
 				currTime += 40;
@@ -358,9 +357,9 @@ public abstract class GUI implements ActionListener {
 		partyLabel.setBounds(10, 240, 80, 25);
 		restaurantPanel.add(partyLabel);
 		
-		JComboBox selectSize = new JComboBox();
+		JComboBox<String> selectSize = new JComboBox<String>();
 		for (int i = 1; i < 11; i++) {
-			selectSize.addItem(i);
+			selectSize.addItem(Integer.toString(i));
 		}
 		selectSize.setBounds(100, 240, 200, 25);
 		restaurantPanel.add(selectSize);
@@ -382,14 +381,13 @@ public abstract class GUI implements ActionListener {
 		submitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//String name, int numPeople, int date, int time, String requests, int id
 				String dateString = (String) selectDate.getSelectedItem();
 				String dateMD = dateString.replace("-", "").substring(0, 4);
 				int date = Integer.parseInt(dateMD);
 				
 				String name = nameText.getText();
-				int partySize = (int) selectSize.getSelectedItem();
-				int time = (int)selectTime.getSelectedItem();
+				int partySize = Integer.parseInt((String)selectSize.getSelectedItem());
+				int time = Integer.parseInt((String)selectTime.getSelectedItem());
 				String request = requestsText.getText();
 				int id = (int) (10000000 + Math.random() * 90000000);
 				
@@ -420,10 +418,10 @@ public abstract class GUI implements ActionListener {
 		ownerSettingsPanel.add(capacityLabel);
 		
 		//change max cap, opening time, closing time
-		JComboBox selectCapacity = new JComboBox();
+		JComboBox<String> selectCapacity = new JComboBox<String>();
 		
 		for (int i = 1; i < 101; i++) {
-			selectCapacity.addItem(i);
+			selectCapacity.addItem(Integer.toString(i));
 		}
 		selectCapacity.setBounds(10, 110, 200, 25);
 		ownerSettingsPanel.add(selectCapacity);
@@ -433,7 +431,7 @@ public abstract class GUI implements ActionListener {
 		ownerSettingsPanel.add(openingLabel);
 		
 		//change max cap, opening time, closing time
-		JComboBox selectOpenTime = new JComboBox();
+		JComboBox<String> selectOpenTime = new JComboBox<String>();
 		int openTime = 0;
 		while (openTime < 2400) {
 			selectOpenTime.addItem(String.format("%04d", openTime));
@@ -450,7 +448,7 @@ public abstract class GUI implements ActionListener {
 		ownerSettingsPanel.add(closingLabel);
 		
 		//change max cap, opening time, closing time
-		JComboBox selectCloseTime = new JComboBox();
+		JComboBox<String> selectCloseTime = new JComboBox<String>();
 		int closeTime = 0;
 		while (closeTime < 2400) {
 			selectCloseTime.addItem(String.format("%04d", closeTime));
@@ -471,7 +469,7 @@ public abstract class GUI implements ActionListener {
 		editButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				r.setMaxCapacity((int)selectCapacity.getSelectedItem());
+				r.setMaxCapacity(Integer.parseInt((String)selectCapacity.getSelectedItem()));
 				r.setOpeningTime(Integer.parseInt((String)selectOpenTime.getSelectedItem()));
 				r.setClosingTime(Integer.parseInt((String)selectCloseTime.getSelectedItem()));
 				statusLabel.setText("Update success!");
