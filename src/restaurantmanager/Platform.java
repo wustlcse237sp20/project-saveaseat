@@ -18,12 +18,9 @@ public class Platform {
 		restaurantPasswords = new HashMap<Restaurant, String>();
 	}
 
-
 	public List<Restaurant> getRestaurants () { 
 		return this.restaurants; 
 	}
-
-
 
 	public String getPassword(Restaurant r) {
 		return this.restaurantPasswords.get(r);
@@ -35,9 +32,13 @@ public class Platform {
 				return this.getPassword(r);
 			}
 		}
-		return "0";
+		return null;
 	}
 	
+	/**
+     * Checks if the restaurant is within the platform
+     * @param the name of the restaurant
+     */
 	public boolean restaurantInSystem(String name) {
 		for (Restaurant r: this.restaurants) {
 			if (name.equals(r.getName())) {
@@ -55,7 +56,12 @@ public class Platform {
 	public void addRestaurantPassword(Restaurant r, String password) {
 		this.restaurantPasswords.put(r, password);
 	}
-
+	
+	/**
+     * Collects restaurant information to create new restaurant 
+     * @param the platform that holds all restaurant information
+     * @return new restaurant
+     */
 	public Restaurant userAddedRestaurant (Platform platform) throws IOException {
 
 		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
@@ -84,6 +90,14 @@ public class Platform {
 		return r; 
 
 	}
+	
+	/**
+     * Checks if there is enough space for the requested reservation 
+     * @param date
+     * @param people in party
+     * @param time
+     * @param restaurant name
+     */
 	public boolean checkAvailability(int date, int numPeople, int time, String place) {
 		int sumPeopleAtTime = 0;
 		Restaurant targetRes = null;
@@ -105,7 +119,13 @@ public class Platform {
 		return true;
 
 	}
-
+	
+	/**
+     * Shows the availability of the restaurant for your party size on a given day
+     * @param date
+     * @param number of people in party
+     * @param restaurant name
+     */
 	public void seeAvailableTimes(int date, int numPeople, String place) {
 		Restaurant currentRes = null;
 		List<Integer> availableTimes = new LinkedList<Integer>();
@@ -132,8 +152,12 @@ public class Platform {
 				}
 			}
 		}
-
 	}
+	
+	/**
+     * Collects necessary information to make a new reservation 
+     * @return new reservation
+     */
 	public Reservation newReservation () throws IOException { 
 		System.out.println("Here is a list of available restaurants:");
 		seeRestaurants();
@@ -191,6 +215,11 @@ public class Platform {
 		return reservation;
 	}
 
+	/**
+     * Finds the  
+     * @param the primary frame of the app
+     * @param the platform that holds all restaurant information
+     */
 	public Restaurant findRestaurant(String name) {
 		for(Restaurant r : this.restaurants) {
 			if(r.getName().equals(name)) {
@@ -205,7 +234,12 @@ public class Platform {
 			System.out.println(r.getName());
 		}
 	}
-
+	
+	/**
+     * Show and edit user reservation
+     * @param name of restaurant
+     * @param id of the reservation
+     */
 	public void manageUserReservations(String restaurantName, int reservationId) throws IOException { 
 		System.out.println("Here are your reservation details: ");
 		Restaurant current;

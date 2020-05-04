@@ -20,7 +20,6 @@ public class saveASeat {
 		Restaurant res2 = new Restaurant("Lucia's Chicken", 10, 1100, 2300);
 		Restaurant res3 = new Restaurant("G Hao's Burgers", 10, 1100, 2300);
 
-
 		platform.addRestaurant(res1);
 		platform.addRestaurant(res2);
 		platform.addRestaurant(res3);

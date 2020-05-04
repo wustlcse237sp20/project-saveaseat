@@ -26,6 +26,7 @@ public abstract class GUI implements ActionListener {
 	private static JPanel ownerMainPanel;
 	private static JPanel restaurantPanel;
 	private static JPanel ownerSettingsPanel;
+	private static JPanel reservationPanel;
 	
 	public static void main(String[] args) {
 		Platform platform = new Platform();
@@ -35,32 +36,19 @@ public abstract class GUI implements ActionListener {
 		startPage(frame, platform);
 	}
 	
-	static void loadData(Platform platform) {
-		Restaurant res1 = new Restaurant("Hamish's Pasta", 100, 1000, 1700);
-		Restaurant res2 = new Restaurant("Lucia's Chicken", 50, 800, 1400);
-		Restaurant res3 = new Restaurant("G Hao's Burgers", 30, 1700, 2200);
-		platform.addRestaurant(res1);
-		platform.addRestaurant(res2);
-		platform.addRestaurant(res3);
-		platform.addRestaurantPassword(res1, "12345");
-		platform.addRestaurantPassword(res2, "12345");
-		platform.addRestaurantPassword(res3, "12345");
-		
-		Reservation rv1 = new Reservation("Hamish's Pasta", "Payden Webb", 10, 1122, 1145, "none", 12345678);
-		Reservation rv2 = new Reservation("Lucia's Chicken", "Emma Goldberg", 10, 1215, 1145, "none", 83827429);
-		Reservation rv3 = new Reservation("G Hao's Burgers", "Marcela Interiano", 10, 1010, 1215, "none", 59938138);
-
-		res1.addReservation(rv1);
-		res1.addReservation(rv2);
-		res1.addReservation(rv3);
-	}
-	
+	/**
+     * Builds the start page panel. Routes the user to the customer page or restaurant owner page. 
+     * @param the primary frame of the app
+     * @param the platform that holds all restaurant information
+     */
 	static void startPage(JFrame frame, Platform platform) {
+		//initialize new panel
 		startPanel = new JPanel();
 		frame.setSize(800, 550);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(startPanel, BorderLayout.CENTER);
 		startPanel.setLayout(null);
+		
 		JLabel label = new JLabel("Welcome to SaveASeat!!!");
 		label.setBounds(340, 200, 200, 25);
 		startPanel.add(label);
@@ -75,6 +63,7 @@ public abstract class GUI implements ActionListener {
 			}
 		});
 		startPanel.add(ownerButton);
+		
 		JButton customerButton = new JButton("Customer");
 		customerButton.setBounds(420, 275, 100, 25);
 		customerButton.addActionListener(new ActionListener() {
@@ -89,6 +78,11 @@ public abstract class GUI implements ActionListener {
 		frame.setVisible(true);
 	}
 	
+	/**
+     * Builds the restaurant owner login page panel 
+     * @param the primary frame of the app
+     * @param the platform that holds all restaurant information
+     */
 	static void loginPage(JFrame frame, Platform platform) {
 		loginPanel = new JPanel();
 		frame.add(loginPanel);
@@ -124,6 +118,7 @@ public abstract class GUI implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean correctDetails = false;
+				//check if user and pass are correct
 				if (platform.restaurantInSystem(userText.getText())) {
 					System.out.println("User in system");
 					if (platform.getPassword(userText.getText()).equals(passText.getText())) {
@@ -131,20 +126,20 @@ public abstract class GUI implements ActionListener {
 						correctDetails = true;
 					}
 				}
-				
-				if (correctDetails) {
+				if (correctDetails) { //authorized user. log in
 					faultText.setText("");
 					loginPanel.setVisible(false);
 					Restaurant r = platform.findRestaurant(userText.getText());
 					ownerMainPage(frame, platform, r);
 				}
-				else {
+				else { //incorrect user/pass
 					faultText.setText("Incorrect username or password");
 				}
 			}
 		});
 		loginPanel.add(loginButton);
 		
+		//creates new restaurant account
 		JButton signupButton = new JButton("Signup");
 		signupButton.setBounds(100, 140, 165, 25);
 		signupButton.addActionListener(new ActionListener() {
@@ -175,6 +170,11 @@ public abstract class GUI implements ActionListener {
 		loginPanel.add(backButton);
 	}
 	
+	/**
+     * Builds the main customer panel 
+     * @param the primary frame of the app
+     * @param the platform that holds all restaurant information
+     */
 	static void customerMainPage(JFrame frame, Platform platform) {
 		customerMainPanel = new JPanel();
 		frame.add(customerMainPanel);
@@ -198,8 +198,9 @@ public abstract class GUI implements ActionListener {
 		for (int j = 0; j < resData.length; j++) {
 			resData[j] = data[j];
 		}
-				
-		JList<String> resList = new JList<String>(resData); //data has type Object[]
+		
+		//create a scrollview of the list of restaurants in our system
+		JList<String> resList = new JList<String>(resData);
 		resList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		resList.setLayoutOrientation(JList.VERTICAL_WRAP);
 		resList.setVisibleRowCount(-1);
@@ -208,6 +209,7 @@ public abstract class GUI implements ActionListener {
 		listScroller.setBounds(10, 50, 750, 300);
 		customerMainPanel.add(listScroller);
 		
+		//opens specific restaurant page
 		JButton select = new JButton("Select");
 		select.setBounds(10, 475, 165, 25);
 		select.addActionListener(new ActionListener() {
@@ -232,6 +234,12 @@ public abstract class GUI implements ActionListener {
 		customerMainPanel.add(backButton);
 	}
 	
+	/**
+     * Builds the restaurant owner main panel 
+     * @param the primary frame of the app
+     * @param the platform that holds all restaurant information
+     * @param the specific restaurant associated with the owners account
+     */
 	static void ownerMainPage(JFrame frame, Platform platform, Restaurant r) {
 		ownerMainPanel = new JPanel();
 		frame.add(ownerMainPanel);
@@ -240,6 +248,7 @@ public abstract class GUI implements ActionListener {
 		welcomeLabel.setBounds(10, 20, 200, 25);
 		ownerMainPanel.add(welcomeLabel);
 		
+		//displays a list of current reservations with the restaurant
 		JLabel resLabel = new JLabel("Here are your current reservations:");
 		resLabel.setBounds(10, 50, 800, 25);
 		ownerMainPanel.add(resLabel);
@@ -256,7 +265,7 @@ public abstract class GUI implements ActionListener {
 			resData[j] = data[j];
 		}
 				
-		JList<String> resList = new JList<String>(resData); //data has type Object[]
+		JList<String> resList = new JList<String>(resData); 
 		resList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		resList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		resList.setVisibleRowCount(-1);
@@ -271,11 +280,12 @@ public abstract class GUI implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ownerMainPanel.setVisible(false);
-				startPanel.setVisible(true);
+				startPage(frame, platform);
 			}
 		});
 		ownerMainPanel.add(logoutButton);
 		
+		//moves to restaurant account settings page
 		JButton settingsButton = new JButton("Account Settings");
 		settingsButton.setBounds(620, 20, 150, 25);
 		settingsButton.addActionListener(new ActionListener() {
@@ -288,6 +298,11 @@ public abstract class GUI implements ActionListener {
 		ownerMainPanel.add(settingsButton);
 	}
 	
+	/**
+     * Builds the restaurant reservation panel
+     * @param the primary frame of the app
+     * @param the specific restaurant selected from previous page
+     */
 	static void restaurantBookingPage(JFrame frame, Restaurant r) {
 		restaurantPanel = new JPanel();
 		frame.add(restaurantPanel);
@@ -307,10 +322,22 @@ public abstract class GUI implements ActionListener {
 		});
 		restaurantPanel.add(backButton);
 		
-		JLabel details = new JLabel(r.getName() + ": Restaurant Details");
-		details.setBounds(10, 50, 200, 25);
-		restaurantPanel.add(details);
+		//moves to manage reservation page
+		JButton manageButton = new JButton("Manage Reservation");
+		manageButton.setBounds(500, 20, 150, 25);
+		manageButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				manageReservation(frame, r);
+				restaurantPanel.setVisible(false);
+			}
+		});
+		restaurantPanel.add(manageButton);
 		
+		JLabel details = new JLabel(r.getName() + ": Restaurant Details");
+		details.setBounds(10, 50, 800, 25);
+		restaurantPanel.add(details);
+		//show restaurant details
 		JLabel openTime = new JLabel("Opening Time: " + String.format("%04d", r.getOpeningTime()));
 		openTime.setBounds(10, 80, 200, 25);
 		restaurantPanel.add(openTime);
@@ -321,11 +348,11 @@ public abstract class GUI implements ActionListener {
 		JLabel reserve = new JLabel("Make a Reservation");
 		reserve.setBounds(10, 150, 200, 25);
 		restaurantPanel.add(reserve);
-		
+		//builds selection box of options for bookings
 		JComboBox<String> selectTime = new JComboBox<String>();
 		int currTime = r.getOpeningTime();
 		while (currTime < r.getClosingTime() - 30) {
-			selectTime.addItem(Integer.toString(currTime));
+			selectTime.addItem(String.format("%04d", currTime));
 			currTime += 15;
 			if (currTime % 100 >= 60) {
 				currTime += 40;
@@ -384,23 +411,87 @@ public abstract class GUI implements ActionListener {
 				String dateString = (String) selectDate.getSelectedItem();
 				String dateMD = dateString.replace("-", "").substring(0, 4);
 				int date = Integer.parseInt(dateMD);
-				
 				String name = nameText.getText();
 				int partySize = Integer.parseInt((String)selectSize.getSelectedItem());
 				int time = Integer.parseInt((String)selectTime.getSelectedItem());
 				String request = requestsText.getText();
 				int id = (int) (10000000 + Math.random() * 90000000);
 				
-				Reservation res = new Reservation(r.getName(), name, partySize, date, time, request, id);
-				r.addReservation(res);
+				if (partySize < r.getMaxCapacity()) {
+					Reservation res = new Reservation(r.getName(), name, partySize, date, time, request, id);
+					r.addReservation(res);
+					
+					statusLabel.setText("Reservation successfully made!! Your reservation id is: " + id);
+				}
+				else {
+					statusLabel.setText("Reservation unsuccessful! No capacity in restaurant");
+				}
 				
-				statusLabel.setText("Reservation successfully made!! Your reservation id is: " + id);
 			}
 		});
 		restaurantPanel.add(submitButton);
-		
 	}
 	
+	/**
+     * Builds the manage reservation panel for customers
+     * @param the primary frame of the app
+     * @param the specific restaurant selected from previous page
+     */
+	static void manageReservation(JFrame frame, Restaurant r) {
+		reservationPanel = new JPanel();
+		frame.add(reservationPanel);
+		reservationPanel.setLayout(null);
+		JLabel label = new JLabel("Manage Reservations: " + r.getName());
+		label.setBounds(10, 10, 500, 25);
+		reservationPanel.add(label);
+		
+		JButton backButton = new JButton("Back");
+		backButton.setBounds(650, 30, 120, 25);
+		backButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				reservationPanel.setVisible(false);
+				restaurantPanel.setVisible(true);
+			}
+		});
+		reservationPanel.add(backButton);
+		
+		JLabel idLabel = new JLabel("Reservation ID: ");
+		idLabel.setBounds(10, 80, 150, 25);
+		reservationPanel.add(idLabel);
+		
+		JTextField idText = new JTextField(20);
+		idText.setBounds(130, 80, 165, 25);
+		reservationPanel.add(idText);
+		
+		JLabel status = new JLabel("");
+		status.setBounds(10, 140, 500, 25);
+		reservationPanel.add(status);
+		
+		JButton cancelButton = new JButton("Cancel Reservation");
+		cancelButton.setBounds(10, 110, 200, 25);
+		cancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (idText.getText().length() == 8) {
+					int idInput = Integer.parseInt(idText.getText());
+					if (r.removeReservation(idInput)) {
+						status.setText("Reservation successfully cancelled");
+					}
+					else {
+						status.setText("Reservation not found.");
+					}
+				}
+			}
+		});
+		reservationPanel.add(cancelButton);
+	}
+	
+	/**
+     * Builds the restaurant owner account settings panel 
+     * @param the primary frame of the app
+     * @param the specific restaurant associated with the owners account
+     */
 	static void accountSettings(JFrame frame, Restaurant r) {
 		ownerSettingsPanel = new JPanel();
 		frame.add(ownerSettingsPanel);
@@ -420,7 +511,7 @@ public abstract class GUI implements ActionListener {
 		//change max cap, opening time, closing time
 		JComboBox<String> selectCapacity = new JComboBox<String>();
 		
-		for (int i = 1; i < 101; i++) {
+		for (int i = 0; i < 101; i++) {
 			selectCapacity.addItem(Integer.toString(i));
 		}
 		selectCapacity.setBounds(10, 110, 200, 25);
@@ -430,7 +521,6 @@ public abstract class GUI implements ActionListener {
 		openingLabel.setBounds(10, 140, 300, 25);
 		ownerSettingsPanel.add(openingLabel);
 		
-		//change max cap, opening time, closing time
 		JComboBox<String> selectOpenTime = new JComboBox<String>();
 		int openTime = 0;
 		while (openTime < 2400) {
@@ -447,7 +537,6 @@ public abstract class GUI implements ActionListener {
 		closingLabel.setBounds(10, 200, 300, 25);
 		ownerSettingsPanel.add(closingLabel);
 		
-		//change max cap, opening time, closing time
 		JComboBox<String> selectCloseTime = new JComboBox<String>();
 		int closeTime = 0;
 		while (closeTime < 2400) {
@@ -487,6 +576,30 @@ public abstract class GUI implements ActionListener {
 			}
 		});
 		ownerSettingsPanel.add(backButton);
+	}
+	
+	/**
+     * Loads all stored data into the application upon startup
+     * @param the platform that holds all restaurant information
+     */
+	static void loadData(Platform platform) {
+		Restaurant res1 = new Restaurant("Hamish's Pasta", 100, 1000, 1700);
+		Restaurant res2 = new Restaurant("Lucia's Chicken", 50, 800, 1400);
+		Restaurant res3 = new Restaurant("G Hao's Burgers", 30, 1700, 2200);
+		platform.addRestaurant(res1);
+		platform.addRestaurant(res2);
+		platform.addRestaurant(res3);
+		platform.addRestaurantPassword(res1, "12345");
+		platform.addRestaurantPassword(res2, "12345");
+		platform.addRestaurantPassword(res3, "12345");
+		
+		Reservation rv1 = new Reservation("Hamish's Pasta", "Payden Webb", 10, 1122, 1145, "none", 12345678);
+		Reservation rv2 = new Reservation("Lucia's Chicken", "Emma Goldberg", 10, 1215, 1145, "none", 83827429);
+		Reservation rv3 = new Reservation("G Hao's Burgers", "Marcela Interiano", 10, 1010, 1215, "none", 59938138);
+
+		res1.addReservation(rv1);
+		res1.addReservation(rv2);
+		res1.addReservation(rv3);
 	}
 	
 }

@@ -70,6 +70,9 @@ public class Restaurant {
     	this.listReservations.add(r);
     }
     
+    /**
+     * Runs the basic platform and collects user requests
+     */
     public void run () throws IOException { 
     	boolean check = false; 
 		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
@@ -89,6 +92,9 @@ public class Restaurant {
     	System.exit(0);
     }
     
+    /**
+     * Shows all reservations in the system
+     */
     public void seeReservations() {
     	if (this.listReservations.size() != 0 ) {
     	 	for (Reservation r : this.listReservations) {
@@ -98,6 +104,20 @@ public class Restaurant {
     	} else { 
     		System.out.println("No new reservations"); 
     	}
+    }
+    
+    /**
+     * Removes selected reservation
+     * @param reservation id
+     */
+    public boolean removeReservation(int id) {
+    	for (int i = 0; i < this.listReservations.size(); i++) {
+    		if (id == this.listReservations.get(i).getId()) {
+    			this.listReservations.remove(i);
+    			return true;
+    		}
+    	}
+    	return false;
     }
    
 
