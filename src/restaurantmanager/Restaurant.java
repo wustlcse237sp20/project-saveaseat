@@ -1,5 +1,8 @@
 package restaurantmanager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -10,7 +13,6 @@ public class Restaurant {
     int currentCapacity;
     int openingTime;
     int closingTime;
-    Reservation[][] reservations; //TODO: figure out how to store reservations (across days)
     public List<Reservation> listReservations;
     String id;
 
@@ -20,9 +22,8 @@ public class Restaurant {
         this.currentCapacity = 0;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
-        this.id = UUID.randomUUID().toString(); //TODO: find a way to generate unique id
+        this.id = UUID.randomUUID().toString();
         this.listReservations= new LinkedList<Reservation>();
-        
     }
     
     public String getName()  {
@@ -45,19 +46,79 @@ public class Restaurant {
     	return this.closingTime;
     }
     
+    public int setMaxCapacity(int capacity)  {
+    	return this.maxCapacity = capacity;
+    }
+    
+    public int setOpeningTime(int time) {
+    	return this.openingTime = time;
+    }
+    
+    public int setClosingTime(int time) {
+    	return this.closingTime = time;
+    }
+    
     public String getId() {
     	return this.id;
+    }
+    
+    public List<Reservation> getReservations() {
+    	return this.listReservations;
     }
 
     public void addReservation(Reservation r) {
     	this.listReservations.add(r);
     }
     
+    /**
+     * Runs the basic platform and collects user requests
+     */
+    public void run () throws IOException { 
+    	boolean check = false; 
+		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
+    	while (!check) { 
+    		System.out.println("Select from following options:");
+    		System.out.println("1 - View current reservations");
+    		System.out.println("q - At anytime to quit");
+    		String input = reader.readLine(); 
+    		if (input.equals("1")) { 
+    			seeReservations(); 
+			}
+			if (input.equals("q")) { 
+				check = true;
+				System.out.println("Goodbye!"); 
+			}
+    	}
+    	System.exit(0);
+    }
+    
+    /**
+     * Shows all reservations in the system
+     */
     public void seeReservations() {
-    	for (Reservation r : this.listReservations) {
-    		System.out.print("Reservation id: "+ r.getId() + " Details: ");
-    		System.out.println("Reservation under "+r.getName()+" for "+r.getNumPeople()+ " people at "+ r.getTime()+" on "+ r.getDate()+".");
+    	if (this.listReservations.size() != 0 ) {
+    	 	for (Reservation r : this.listReservations) {
+        		System.out.print("Reservation id: "+ r.getId() + " Details: ");
+        		System.out.println("Reservation under "+r.getName()+" for "+r.getNumPeople()+ " people at "+ r.getTime()+" on "+ r.getDate()+".");
+        	}
+    	} else { 
+    		System.out.println("No new reservations"); 
     	}
     }
+    
+    /**
+     * Removes selected reservation
+     * @param reservation id
+     */
+    public boolean removeReservation(int id) {
+    	for (int i = 0; i < this.listReservations.size(); i++) {
+    		if (id == this.listReservations.get(i).getId()) {
+    			this.listReservations.remove(i);
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+   
 
 }

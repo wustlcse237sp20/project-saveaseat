@@ -16,18 +16,18 @@ class RestaurantTest {
 	
 	@BeforeEach
 	void setupTestingObjects() {
-		testRestaurant = new Restaurant("Test", 1, 1, 1);
-		testReservation = new Reservation("Test", 1, 1, 1800, "none", 123); 
+		testRestaurant = new Restaurant("Jeff's Vegan Treats", 100, 1000, 2000);
+		testReservation = new Reservation("Jeff's Vegan Treats", "James", 1, 1, 1800, "none", 123); 
 	}
 
 	@Test
 	void testGetName() {
-		assertEquals("Test", testRestaurant.getName()); 
+		assertEquals("Jeff's Vegan Treats", testRestaurant.getName()); 
 	}
 
 	@Test
 	void testGetMaxCapacity() {
-		assertEquals(1, testRestaurant.getMaxCapacity()); 
+		assertEquals(100, testRestaurant.getMaxCapacity()); 
 	}
 
 	@Test
@@ -37,18 +37,24 @@ class RestaurantTest {
 
 	@Test
 	void testGetOpeningTime() {
-		assertEquals(1, testRestaurant.getOpeningTime());
+		assertEquals(1000, testRestaurant.getOpeningTime());
 	}
 
 	@Test
 	void testGetClosingTime() {
-		assertEquals(1, testRestaurant.getClosingTime());
+		assertEquals(2000, testRestaurant.getClosingTime());
 	}
 
 	@Test
 	void testAddReservation() {
 		testRestaurant.addReservation(testReservation); 
 		assertEquals(1, testRestaurant.listReservations.size()); 
+	}
+	
+	@Test
+	void testGetReservations() {
+		testRestaurant.addReservation(testReservation); 
+		assertNotNull(testRestaurant.getReservations()); 
 	}
 
 }
