@@ -9,6 +9,7 @@ Restaurant owners should be able to enter the name of their restaurant, enter th
 To compile type: javac *.java in the restaurantmanager folder.
 To run type: java restaurantmanager.saveASeat in src folder.
 To run GUI type: java restaurantmanager.GUI in src folder. 
+Or open our executable SaveASeat.jar file in the main folder.
 
 You can try logging in as 1 of 3 restaurants:  
 1. Lucia's Chicken, password 12345
