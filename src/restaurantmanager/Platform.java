@@ -101,6 +101,7 @@ public class Platform {
 	public boolean checkAvailability(int date, int numPeople, int time, String place) {
 		int sumPeopleAtTime = 0;
 		Restaurant targetRes = null;
+		boolean ret = false;
 		for(Restaurant r : this.restaurants) {
 			if(r.getName().equals(place)) {
 				targetRes = r;
@@ -114,10 +115,12 @@ public class Platform {
 			}
 		}
 		if((sumPeopleAtTime + numPeople) > targetRes.maxCapacity) {
-			return false;
+			ret = false;
+		} else if((sumPeopleAtTime + numPeople) <= targetRes.maxCapacity){
+			ret = true;
 		}
-		return true;
-
+		
+		return ret;
 	}
 	
 	/**
