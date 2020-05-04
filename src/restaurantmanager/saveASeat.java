@@ -16,9 +16,9 @@ public class saveASeat {
 		BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));
 		String userType = reader.readLine();
 
-		Restaurant res1 = new Restaurant("Hammy's", 10, 1100, 2300);
-		Restaurant res2 = new Restaurant("Lucia's", 10, 1100, 2300);
-		Restaurant res3 = new Restaurant("G Hao's", 10, 1100, 2300);
+		Restaurant res1 = new Restaurant("Hamish's Pasta", 10, 1100, 2300);
+		Restaurant res2 = new Restaurant("Lucia's Chicken", 10, 1100, 2300);
+		Restaurant res3 = new Restaurant("G Hao's Burgers", 10, 1100, 2300);
 
 
 		platform.addRestaurant(res1);
