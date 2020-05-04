@@ -20,7 +20,7 @@ public class Restaurant {
         this.currentCapacity = 0;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
-        this.id = UUID.randomUUID().toString(); //TODO: find a way to generate unique id
+        this.id = UUID.randomUUID().toString();
         this.listReservations= new LinkedList<Reservation>();
         
     }
@@ -48,6 +48,10 @@ public class Restaurant {
     public String getId() {
     	return this.id;
     }
+    
+    public List<Reservation> getReservations() {
+    	return this.listReservations;
+    }
 
     public void addReservation(Reservation r) {
     	this.listReservations.add(r);
@@ -59,5 +63,6 @@ public class Restaurant {
     		System.out.println("Reservation under "+r.getName()+" for "+r.getNumPeople()+ " people at "+ r.getTime()+" on "+ r.getDate()+".");
     	}
     }
+   
 
 }

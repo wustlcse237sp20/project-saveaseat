@@ -22,6 +22,29 @@ public class Platform {
 		return this.restaurantPasswords.get(r);
 	}
 	
+	public String getPassword(String name) {
+		for (Restaurant r : this.restaurants) {
+			if (name.equals(r.getName())) {
+				return this.getPassword(r);
+			}
+		}
+		return "0";
+	}
+	
+	public List<Restaurant> getRestaurants() {
+		return this.restaurants;
+	}
+	
+	public boolean restaurantInSystem(String name) {
+		for (Restaurant r: this.restaurants) {
+			if (name.equals(r.getName())) {
+				System.out.println(r.getName());
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void seeRestaurants() {
 		for(Restaurant r: this.restaurants) {
 			System.out.println(r.getName());
